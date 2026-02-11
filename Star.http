@@ -1,0 +1,6 @@
+@Star_HostAddress = http://localhost:5280
+
+GET {{Star_HostAddress}}/weatherforecast/
+Accept: application/json
+
+

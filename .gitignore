@@ -1,0 +1,13 @@
+# Visual Studio folders
+.vs/
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+# SQLite temporary files (since you're using SQLite)
+*.db-shm
+*.db-wal
