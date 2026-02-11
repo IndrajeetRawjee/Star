@@ -1,15 +1,20 @@
 ﻿using Star.User;
 namespace Star.Password
 {
-    public class PasswordService
+    public class PasswordService : IPasswordService
     {
         public PasswordService() { }
 
-        public User.Password Hash(User.Password password)
+        public string Hash(User.Password password)
         {
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password.Value, salt);
-            return password;
+            return hashedPassword;
         }
+        public bool Verify(User.Password password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(password.Value, hashedPassword);
+        }
+        
     }
 }

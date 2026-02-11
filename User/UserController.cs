@@ -11,17 +11,22 @@ namespace Star.User
         {
             _userService = userService;
         }
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody]User newUser)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody]RegisterDto dto)
         {
-            var user = await _userService.CreateUser(newUser);
-            return Ok(user);
+            await _userService.CreateUser(dto);
+            return Ok($"{dto.FirstName} have been successfully registered");
         }
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody]LoginDto dto)
         {
-            var user = await _userService.GetUsers();
-            return Ok(user);
+            var (isValid,token) = await _userService.ValidateUser(dto);
+            await _userService.ValidateUser(dto);
+            if (!isValid)
+            {
+                return Unauthorized("Invalid email or password");
+            }
+            return Ok($"{dto.Email} loggedIn and token = {token}");
         }
     }
 }

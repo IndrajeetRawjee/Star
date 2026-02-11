@@ -1,9 +1,17 @@
-﻿namespace Star.User
+﻿
+
+namespace Star.User
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> CreateUser(User user);
+        Task<User> CreateUser(RegisterDto dto);
+        Task<(bool IsValid,string token)> ValidateUser(LoginDto dto);
+
+    }
+    public interface IAdminService
+    {
+        Task<User> GetUser(User user);
+        Task<bool> DeleteUser(User user);
 
     }
 }
